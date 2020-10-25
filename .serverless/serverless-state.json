@@ -106,6 +106,18 @@
               "LogGroupName": "/aws/lambda/newleaf-api-prod-profile-get"
             }
           },
+          "ProfileDashmanagerDashlistLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/newleaf-api-prod-profile-manager-list"
+            }
+          },
+          "ProfileDashmanagerDashaddLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/newleaf-api-prod-profile-manager-add"
+            }
+          },
           "IamRoleLambdaExecution": {
             "Type": "AWS::IAM::Role",
             "Properties": {
@@ -196,7 +208,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/newleaf-api/prod/1603638972099-2020-10-25T15:16:12.099Z/newleaf-api.zip"
+                "S3Key": "serverless/newleaf-api/prod/1603644186015-2020-10-25T16:43:06.015Z/newleaf-api.zip"
               },
               "FunctionName": "newleaf-api-prod-profile-social",
               "Handler": "src/profile-social.handler",
@@ -219,14 +231,14 @@
               "ProfileDashsocialLogGroup"
             ]
           },
-          "ProfileDashsocialLambdaVersionSDGYW4llEf4qwo0UDgZ0P0t9GAuf2Ao5RdWcbWw": {
+          "ProfileDashsocialLambdaVersion9EBQWsW2pP2qKYRr0CtQmMnjYguIoTQCrjG4dWpT0g": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ProfileDashsocialLambdaFunction"
               },
-              "CodeSha256": "kpR7vWhrlfJ39HgPq5xy1oikdd+JVbnjRdAP9FpiQyo="
+              "CodeSha256": "Ea6PlJyAx1PFtTkBSH3WuUjLE4dsStIekYLBUoJP3OE="
             }
           },
           "ProfileDashgetLambdaFunction": {
@@ -236,7 +248,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/newleaf-api/prod/1603638972099-2020-10-25T15:16:12.099Z/newleaf-api.zip"
+                "S3Key": "serverless/newleaf-api/prod/1603644186015-2020-10-25T16:43:06.015Z/newleaf-api.zip"
               },
               "FunctionName": "newleaf-api-prod-profile-get",
               "Handler": "src/profile-get.handler",
@@ -259,14 +271,94 @@
               "ProfileDashgetLogGroup"
             ]
           },
-          "ProfileDashgetLambdaVersionqYqDdk8djop4rmBvXZThKHBGTs8y3zoyvg1iz7Dtek": {
+          "ProfileDashgetLambdaVersion8BS88F8GZqPEgI4mZCHkm5RX7A1SZ7tX2YQEVSMaNR8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ProfileDashgetLambdaFunction"
               },
-              "CodeSha256": "kpR7vWhrlfJ39HgPq5xy1oikdd+JVbnjRdAP9FpiQyo="
+              "CodeSha256": "Ea6PlJyAx1PFtTkBSH3WuUjLE4dsStIekYLBUoJP3OE="
+            }
+          },
+          "ProfileDashmanagerDashlistLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/newleaf-api/prod/1603644186015-2020-10-25T16:43:06.015Z/newleaf-api.zip"
+              },
+              "FunctionName": "newleaf-api-prod-profile-manager-list",
+              "Handler": "src/manager/list.handler",
+              "MemorySize": 128,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              },
+              "Runtime": "nodejs12.x",
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "DYNAMODB_TABLE": "newleaf-profile"
+                }
+              }
+            },
+            "DependsOn": [
+              "ProfileDashmanagerDashlistLogGroup"
+            ]
+          },
+          "ProfileDashmanagerDashlistLambdaVersionN7ANhpTRiiaVUPxgN6DkENRipHWTaEGwxhr9EWwnpOc": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "ProfileDashmanagerDashlistLambdaFunction"
+              },
+              "CodeSha256": "Ea6PlJyAx1PFtTkBSH3WuUjLE4dsStIekYLBUoJP3OE="
+            }
+          },
+          "ProfileDashmanagerDashaddLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/newleaf-api/prod/1603644186015-2020-10-25T16:43:06.015Z/newleaf-api.zip"
+              },
+              "FunctionName": "newleaf-api-prod-profile-manager-add",
+              "Handler": "src/manager/add.handler",
+              "MemorySize": 128,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              },
+              "Runtime": "nodejs12.x",
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "DYNAMODB_TABLE": "newleaf-profile"
+                }
+              }
+            },
+            "DependsOn": [
+              "ProfileDashmanagerDashaddLogGroup"
+            ]
+          },
+          "ProfileDashmanagerDashaddLambdaVersionLQUyctscU6UAjpWkaaKP3SI3bhGvrr9t8NwvKPJoB4": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "ProfileDashmanagerDashaddLambdaFunction"
+              },
+              "CodeSha256": "Ea6PlJyAx1PFtTkBSH3WuUjLE4dsStIekYLBUoJP3OE="
             }
           },
           "ApiGatewayRestApi": {
@@ -315,6 +407,18 @@
                 "Ref": "ApiGatewayResourceProfile"
               },
               "PathPart": "{id}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceProfileManager": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceProfile"
+              },
+              "PathPart": "manager",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -410,6 +514,51 @@
               }
             }
           },
+          "ApiGatewayMethodProfileManagerOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST,GET'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceProfileManager"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
           "ApiGatewayMethodProfileSocialPost": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
@@ -496,7 +645,93 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1603638970260": {
+          "ApiGatewayMethodProfileManagerGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceProfileManager"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "ProfileDashmanagerDashlistLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayMethodProfileManagerPost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceProfileManager"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "ProfileDashmanagerDashaddLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayDeployment1603644183589": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -507,8 +742,11 @@
             "DependsOn": [
               "ApiGatewayMethodProfileSocialOptions",
               "ApiGatewayMethodProfileIdVarOptions",
+              "ApiGatewayMethodProfileManagerOptions",
               "ApiGatewayMethodProfileSocialPost",
-              "ApiGatewayMethodProfileIdVarGet"
+              "ApiGatewayMethodProfileIdVarGet",
+              "ApiGatewayMethodProfileManagerGet",
+              "ApiGatewayMethodProfileManagerPost"
             ]
           },
           "ProfileDashsocialLambdaPermissionApiGateway": {
@@ -584,6 +822,80 @@
                 ]
               }
             }
+          },
+          "ProfileDashmanagerDashlistLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "ProfileDashmanagerDashlistLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "ProfileDashmanagerDashaddLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "ProfileDashmanagerDashaddLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
           }
         },
         "Outputs": {
@@ -595,13 +907,25 @@
           "ProfileDashsocialLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ProfileDashsocialLambdaVersionSDGYW4llEf4qwo0UDgZ0P0t9GAuf2Ao5RdWcbWw"
+              "Ref": "ProfileDashsocialLambdaVersion9EBQWsW2pP2qKYRr0CtQmMnjYguIoTQCrjG4dWpT0g"
             }
           },
           "ProfileDashgetLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ProfileDashgetLambdaVersionqYqDdk8djop4rmBvXZThKHBGTs8y3zoyvg1iz7Dtek"
+              "Ref": "ProfileDashgetLambdaVersion8BS88F8GZqPEgI4mZCHkm5RX7A1SZ7tX2YQEVSMaNR8"
+            }
+          },
+          "ProfileDashmanagerDashlistLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "ProfileDashmanagerDashlistLambdaVersionN7ANhpTRiiaVUPxgN6DkENRipHWTaEGwxhr9EWwnpOc"
+            }
+          },
+          "ProfileDashmanagerDashaddLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "ProfileDashmanagerDashaddLambdaVersionLQUyctscU6UAjpWkaaKP3SI3bhGvrr9t8NwvKPJoB4"
             }
           },
           "ServiceEndpoint": {
@@ -737,7 +1061,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "ProfileDashsocialLambdaVersionSDGYW4llEf4qwo0UDgZ0P0t9GAuf2Ao5RdWcbWw"
+        "versionLogicalId": "ProfileDashsocialLambdaVersion9EBQWsW2pP2qKYRr0CtQmMnjYguIoTQCrjG4dWpT0g"
       },
       "profile-get": {
         "handler": "src/profile-get.handler",
@@ -776,7 +1100,85 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "ProfileDashgetLambdaVersionqYqDdk8djop4rmBvXZThKHBGTs8y3zoyvg1iz7Dtek"
+        "versionLogicalId": "ProfileDashgetLambdaVersion8BS88F8GZqPEgI4mZCHkm5RX7A1SZ7tX2YQEVSMaNR8"
+      },
+      "profile-manager-list": {
+        "handler": "src/manager/list.handler",
+        "memorySize": 128,
+        "events": [
+          {
+            "http": {
+              "path": "profile/manager",
+              "method": "get",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "GET"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "newleaf-api-prod-profile-manager-list",
+        "package": {},
+        "memory": 128,
+        "timeout": 6,
+        "runtime": "nodejs12.x",
+        "vpc": {},
+        "versionLogicalId": "ProfileDashmanagerDashlistLambdaVersionN7ANhpTRiiaVUPxgN6DkENRipHWTaEGwxhr9EWwnpOc"
+      },
+      "profile-manager-add": {
+        "handler": "src/manager/add.handler",
+        "memorySize": 128,
+        "events": [
+          {
+            "http": {
+              "path": "profile/manager",
+              "method": "post",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "POST"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "newleaf-api-prod-profile-manager-add",
+        "package": {},
+        "memory": 128,
+        "timeout": 6,
+        "runtime": "nodejs12.x",
+        "vpc": {},
+        "versionLogicalId": "ProfileDashmanagerDashaddLambdaVersionLQUyctscU6UAjpWkaaKP3SI3bhGvrr9t8NwvKPJoB4"
       }
     },
     "configValidationMode": "warn",
@@ -824,7 +1226,7 @@
     "artifact": "/Users/rsouza/work/newleaf/newleaf-api/.serverless/newleaf-api.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/newleaf-api/prod/1603638972099-2020-10-25T15:16:12.099Z",
+    "artifactDirectoryName": "serverless/newleaf-api/prod/1603644186015-2020-10-25T16:43:06.015Z",
     "artifact": "newleaf-api.zip"
   }
 }

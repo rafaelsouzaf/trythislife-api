@@ -46,6 +46,36 @@ functions:
           method: get
           cors: true
 
+###
+### Manager
+###
+  profile-manager-list:
+      handler: src/manager/list.handler
+      memorySize: 128
+      events:
+          -   http:
+                  path: profile/manager
+                  method: get
+                  cors: true
+
+  profile-manager-add:
+      handler: src/manager/add.handler
+      memorySize: 128
+      events:
+          -   http:
+                  path: profile/manager
+                  method: post
+                  cors: true
+#
+#  profile-manager-delete:
+#      handler: src/manager/delete.handler
+#      memorySize: 128
+#      events:
+#          -   http:
+#                  path: profile/manager
+#                  method: delete
+#                  cors: true
+
 ## resource extra
 # /profile
 # method: POST
