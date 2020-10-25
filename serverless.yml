@@ -1,0 +1,57 @@
+#service: aws-node-typescript-rest-api-with-dynamodb
+service: newleaf-api
+frameworkVersion: ">=1.1.0 <3.0.0"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-east-1
+  stage: prod
+  environment:
+#    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+    DYNAMODB_TABLE: newleaf-profile
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}/index/*"
+
+functions:
+
+  profile-social:
+    handler: src/profile-social.handler
+    memorySize: 128
+    events:
+      - http:
+          path: profile/social
+          method: post
+          cors: true
+
+  profile-get:
+    handler: src/profile-get.handler
+    memorySize: 128
+    events:
+      - http:
+          path: profile/{id}
+          method: get
+          cors: true
+
+## resource extra
+# /profile
+# method: POST
+# type: http
+# http://newleaf-profile-creator-env-prod.us-east-1.elasticbeanstalk.com/api/profile
+# with Passthrough
+# with Proxy integration
+# with CORS
+

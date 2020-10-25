@@ -1,0 +1,9 @@
+# profile get
+sls invoke local --function profile-get  --data '{ "pathParameters": {"id":"13c78115-4dd0-4b9f-83ed-29a1b0fe39dd"}}'
+
+# profile social
+sls invoke local --function profile-social  --data '{ "pathParameters": {"id":"13c78115-4dd0-4b9f-83ed-29a1b0fe39dd",
+"email":"rafaelsouzaf@gmail.com"}}'
+
+
+
