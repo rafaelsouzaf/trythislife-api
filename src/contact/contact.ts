@@ -23,16 +23,16 @@ module.exports.handler = (event, context, callback) => {
 // handler.js
 function sendEmail(formData, callback) {
     const emailParams = {
-        Source: 'rafaelsouzaf@gmail.com', // SES SENDING EMAIL
-        ReplyToAddresses: [formData.reply_to],
+        Source: 'contact@newleaf.app', // SES SENDING EMAIL
+        ReplyToAddresses: [formData.email],
         Destination: {
-            ToAddresses: ['rafaelsouzaf@gmail.com'], // SES RECEIVING EMAIL
+            ToAddresses: ['contact@newleaf.app'], // SES RECEIVING EMAIL
         },
         Message: {
             Body: {
                 Text: {
                     Charset: 'UTF-8',
-                    Data: `${formData.message}\n\nName: ${formData.name}\nEmail: ${formData.reply_to}`,
+                    Data: `${formData.message}\n\nName: ${formData.name}\nEmail: ${formData.email}`,
                 },
             },
             Subject: {
