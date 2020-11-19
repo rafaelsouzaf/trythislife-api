@@ -1,16 +1,10 @@
 {
-  "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs"
-  },
-  "include": [
-    "**/*"
-  ],
-  "exclude": [
-    "node_modules"
-  ],
-  "types": [
-    "node",
-    "aws-sdk"
-  ]
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "rootDir": "src"
+    },
+    "include": ["**/*"],
+    "exclude": ["node_modules"],
+    "types": ["node", "aws-sdk"]
 }

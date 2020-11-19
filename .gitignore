@@ -9,7 +9,7 @@
 
 # dependencies
 /node_modules
-.serverless
+/.serverless
 
 **/*.js
 

@@ -3,83 +3,94 @@ service: newleaf-api
 frameworkVersion: ">=1.1.0 <3.0.0"
 
 provider:
-  name: aws
-  runtime: nodejs12.x
-  region: us-east-1
-  stage: prod
-  environment:
-#    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
-    DYNAMODB_TABLE: newleaf-profile
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
-    - Effect: Allow
-      Action:
-        - dynamodb:Query
-        - dynamodb:Scan
-      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}/index/*"
-    - Effect: Allow
-      Action:
-        - ses:SendEmail
-      Resource: "*"
+    name: aws
+    runtime: nodejs12.x
+    region: us-east-1
+    stage: prod
+    environment:
+        #    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+        DYNAMODB_TABLE: newleaf-profile
+    iamRoleStatements:
+        - Effect: Allow
+          Action:
+              - dynamodb:Query
+              - dynamodb:Scan
+              - dynamodb:GetItem
+              - dynamodb:PutItem
+              - dynamodb:UpdateItem
+              - dynamodb:DeleteItem
+          Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+        - Effect: Allow
+          Action:
+              - dynamodb:Query
+              - dynamodb:Scan
+          Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}/index/*"
+        - Effect: Allow
+          Action:
+              - ses:SendEmail
+          Resource: "*"
 
 functions:
+    profile-get:
+        handler: src/profile-get.handler
+        memorySize: 128
+        events:
+            - http:
+                  path: profile/{id}
+                  method: get
+                  cors: true
 
-  profile-social:
-    handler: src/profile-social.handler
-    memorySize: 128
-    events:
-      - http:
-          path: profile/social
-          method: post
-          cors: true
+    profile-get-social:
+        handler: src/profile-get-social.handler
+        memorySize: 128
+        events:
+            - http:
+                  path: profile/social
+                  method: post
+                  cors: true
 
-  profile-get:
-    handler: src/profile-get.handler
-    memorySize: 128
-    events:
-      - http:
-          path: profile/{id}
-          method: get
-          cors: true
-
-###
-### Manager
-###
-  profile-manager-list:
-      handler: src/manager/list.handler
-      memorySize: 128
-      events:
-          -   http:
+    ###
+    ### Manager
+    ###
+    profile-manager-list:
+        handler: src/manager/list.handler
+        memorySize: 128
+        events:
+            - http:
                   path: profile/manager
                   method: get
                   cors: true
 
-  profile-manager-add:
-      handler: src/manager/add.handler
-      memorySize: 128
-      events:
-          -   http:
+    profile-manager-add:
+        handler: src/manager/add.handler
+        memorySize: 128
+        events:
+            - http:
                   path: profile/manager
                   method: post
                   cors: true
 
-###
-### Contact
-###
-  contact:
-      handler: src/contact/contact.handler
-      memorySize: 128
-      events:
-          -   http:
+    ###
+    ### Contact
+    ###
+    contact:
+        handler: src/contact/contact.handler
+        memorySize: 128
+        events:
+            - http:
                   path: contact
+                  method: post
+                  cors: true
+
+    ###
+    ### Auth
+    ###
+    auth:
+        handler: src/auth/auth.handler
+        memorySize: 128
+        events:
+            - http:
+                  path: auth
                   method: post
                   cors: true
 #
