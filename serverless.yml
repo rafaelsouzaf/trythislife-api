@@ -93,7 +93,17 @@ functions:
                   path: auth
                   method: post
                   cors: true
-#
+
+    ###
+    ### Manager
+    ###
+    sitemap:
+        handler: src/sitemap/sitemap.handler
+        memorySize: 128
+        events:
+            - http:
+                  path: sitemap
+                  method: get
 #  profile-manager-delete:
 #      handler: src/manager/delete.handler
 #      memorySize: 128

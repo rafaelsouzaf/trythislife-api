@@ -13,6 +13,16 @@ export class Response {
         });
     };
 
+    static sendText = (callback, statusCode, text) => {
+        callback(null, {
+            statusCode: statusCode,
+            headers: {
+                'Content-Type': 'text/plain',
+            },
+            body: text,
+        });
+    };
+
     static error = (callback, statusCode, msg) => {
         if (msg) {
             console.error(msg);
