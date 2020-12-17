@@ -101,6 +101,9 @@ functions:
         handler: src/sitemap/sitemap.handler
         memorySize: 128
         events:
+            - schedule:
+                  name: scheduled-sitemap
+                  rate: rate(12 hours)
             - http:
                   path: sitemap
                   method: get

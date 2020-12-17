@@ -1,5 +1,6 @@
 import { DynamoDB } from 'aws-sdk';
 import { Response } from '../util/response';
+import fetch from 'node-fetch';
 
 const dynamoDb = new DynamoDB.DocumentClient();
 
@@ -32,6 +33,13 @@ exports.handler = (event, context, callback) => {
                 listUrl += 'https://newleaf.app/privacy-policy\r\n';
                 listUrl += 'https://newleaf.app/terms-of-service\r\n';
                 listUrl += 'https://newleaf.app/@rafael-souza-fijalkowski\r\n';
+
+                // PING GOOGLE SEARCH
+                const siteMapUrl = 'https://www.google.com/ping?sitemap=https://api.newleaf.app/v1/sitemap';
+                fetch(siteMapUrl).then((res) => {
+                    console.log('Google Pong');
+                });
+
                 Response.sendText(callback, 200, listUrl);
             } else {
                 Response.sendText(callback, 200, '');
