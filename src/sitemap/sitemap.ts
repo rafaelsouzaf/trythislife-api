@@ -35,9 +35,15 @@ exports.handler = (event, context, callback) => {
                 listUrl += 'https://newleaf.app/@rafael-souza-fijalkowski\r\n';
 
                 // PING GOOGLE SEARCH
-                const siteMapUrl = 'https://www.google.com/ping?sitemap=https://api.newleaf.app/v1/sitemap';
+                let siteMapUrl = 'https://www.google.com/ping?sitemap=https://api.newleaf.app/v1/sitemap';
                 fetch(siteMapUrl).then((res) => {
                     console.log('Google Pong');
+                });
+
+                // PING BING
+                siteMapUrl = 'http://www.bing.com/ping?sitemap=https://api.newleaf.app/v1/sitemap';
+                fetch(siteMapUrl).then((res) => {
+                    console.log('Bing Pong');
                 });
 
                 Response.sendText(callback, 200, listUrl);
