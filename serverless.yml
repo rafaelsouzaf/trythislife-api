@@ -95,17 +95,25 @@ functions:
                   cors: true
 
     ###
-    ### Manager
+    ### Sitemap
     ###
     sitemap:
         handler: src/sitemap/sitemap.handler
+        memorySize: 128
+        events:
+            - http:
+                  path: sitemap
+                  method: get
+
+    sitemap-ping:
+        handler: src/sitemap/sitemap-ping.handler
         memorySize: 128
         events:
             - schedule:
                   name: scheduled-sitemap
                   rate: rate(12 hours)
             - http:
-                  path: sitemap
+                  path: sitemap-ping
                   method: get
 #  profile-manager-delete:
 #      handler: src/manager/delete.handler

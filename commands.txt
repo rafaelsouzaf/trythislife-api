@@ -3,6 +3,7 @@ sls invoke local --function profile-get  --data '{ "pathParameters": {"id":"13c7
 
 # sitemap
 sls invoke local --function sitemap
+sls invoke local --function sitemap-ping
 
 # profile social
 sls invoke local --function profile-social  --data '{ "pathParameters": {"id":"13c78115-4dd0-4b9f-83ed-29a1b0fe39dd",
