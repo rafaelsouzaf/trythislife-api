@@ -110,7 +110,7 @@ functions:
         memorySize: 128
         events:
             - schedule:
-                  name: scheduled-sitemap
+                  name: scheduled-sitemap-ping
                   rate: rate(12 hours)
             - http:
                   path: sitemap-ping
