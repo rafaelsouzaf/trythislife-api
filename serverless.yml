@@ -99,7 +99,7 @@ functions:
     ###
     sitemap:
         handler: src/sitemap/sitemap.handler
-        memorySize: 128
+        memorySize: 256
         events:
             - http:
                   path: sitemap

@@ -12,7 +12,7 @@ exports.handler = (event, context, callback) => {
             ':main': 0,
         },
         ScanIndexForward: false,
-        Limit: 500,
+        Limit: 1000,
     };
 
     dynamoDb.query(paramsGet, (err, data) => {
@@ -23,19 +23,55 @@ exports.handler = (event, context, callback) => {
             if (data.Count > 0) {
                 let listUrl = '';
                 data.Items.forEach((item) => {
-                    listUrl += 'https://newleaf.app/@' + item.id + '\r\n';
+                    listUrl += makeLinksByLang('@' + item.id);
                 });
-                listUrl += 'https://newleaf.app\r\n';
-                listUrl += 'https://newleaf.app/faq\r\n';
-                listUrl += 'https://newleaf.app/donation\r\n';
-                listUrl += 'https://newleaf.app/contact\r\n';
-                listUrl += 'https://newleaf.app/privacy-policy\r\n';
-                listUrl += 'https://newleaf.app/terms-of-service\r\n';
-                listUrl += 'https://newleaf.app/@rafael-souza-fijalkowski\r\n';
+                listUrl += makeLinksByLang('');
+                listUrl += makeLinksByLang('faq');
+                listUrl += makeLinksByLang('donation');
+                listUrl += makeLinksByLang('contact');
+                listUrl += makeLinksByLang('privacy-policy');
+                listUrl += makeLinksByLang('terms-of-service');
+                listUrl += makeLinksByLang('@rafael-souza-fijalkowski');
                 Response.sendText(callback, 200, listUrl);
             } else {
                 Response.sendText(callback, 200, '');
             }
         }
     });
+};
+
+const langs = [
+    'en',
+    'ar',
+    'bn',
+    'zh-CN',
+    'de',
+    'es',
+    'fi',
+    'fr',
+    'hi',
+    'is',
+    'id',
+    'it',
+    'ja',
+    'ko',
+    'no',
+    'fa',
+    'pl',
+    'pt',
+    'ru',
+    'so',
+    'sv',
+    'tr',
+];
+
+const makeLinksByLang = (path: string): string => {
+    let links = 'https://newleaf.app/' + path + '\r\n';
+    langs.forEach((lang) => {
+        if (lang === 'en') {
+            return;
+        }
+        links += 'https://newleaf.app/' + path + '?lang=' + lang + '\r\n';
+    });
+    return links;
 };
