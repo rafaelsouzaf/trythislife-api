@@ -5,7 +5,7 @@ export class Response {
         callback(null, {
             statusCode: statusCode,
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json; charset=utf-8',
                 'Access-Control-Allow-Methods': 'POST,OPTIONS',
                 'Access-Control-Allow-Origin': '*',
             },
@@ -17,7 +17,7 @@ export class Response {
         callback(null, {
             statusCode: statusCode,
             headers: {
-                'Content-Type': 'text/plain',
+                'Content-Type': 'text/plain; charset=utf-8',
             },
             body: text,
         });

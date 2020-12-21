@@ -42,36 +42,36 @@ exports.handler = (event, context, callback) => {
 
 const langs = [
     'en',
-    'ar',
-    'bn',
-    'zh-CN',
-    'de',
-    'es',
-    'fi',
-    'fr',
-    'hi',
-    'is',
-    'id',
-    'it',
-    'ja',
-    'ko',
-    'no',
-    'fa',
-    'pl',
-    'pt',
-    'ru',
-    'so',
-    'sv',
-    'tr',
+    // 'ar',
+    // 'bn',
+    // 'zh-CN',
+    // 'de',
+    // 'es',
+    // 'fi',
+    // 'fr',
+    // 'hi',
+    // 'is',
+    // 'id',
+    // 'it',
+    // 'ja',
+    // 'ko',
+    // 'no',
+    // 'fa',
+    // 'pl',
+    // 'pt',
+    // 'ru',
+    // 'so',
+    // 'sv',
+    // 'tr',
 ];
 
 const makeLinksByLang = (path: string): string => {
-    let links = 'https://newleaf.app/' + path + '\r\n';
+    let links = 'https://www.newleaf.app/' + encodeURI(path) + '\r\n';
     langs.forEach((lang) => {
         if (lang === 'en') {
             return;
         }
-        links += 'https://newleaf.app/' + path + '?lang=' + lang + '\r\n';
+        links += 'https://www.newleaf.app/' + encodeURI(path) + '?lang=' + lang + '\r\n';
     });
     return links;
 };
