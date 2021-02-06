@@ -66,12 +66,12 @@ const langs = [
 ];
 
 const makeLinksByLang = (path: string): string => {
-    let links = 'https://www.newleaf.app/' + encodeURI(path) + '\r\n';
+    let links = 'https://www.trythis.life/' + encodeURI(path) + '\r\n';
     langs.forEach((lang) => {
         if (lang === 'en') {
             return;
         }
-        links += 'https://www.newleaf.app/' + encodeURI(path) + '?lang=' + lang + '\r\n';
+        links += 'https://www.trythis.life/' + encodeURI(path) + '?lang=' + lang + '\r\n';
     });
     return links;
 };

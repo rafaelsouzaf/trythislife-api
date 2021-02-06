@@ -47,10 +47,10 @@ module.exports.handler = (event, context, callback) => {
 // handler.js
 function sendEmail(formData, callback) {
     const emailParams = {
-        Source: 'contact@newleaf.app', // SES SENDING EMAIL
+        Source: 'contact@trythis.life', // SES SENDING EMAIL
         ReplyToAddresses: [formData.email],
         Destination: {
-            ToAddresses: ['contact@newleaf.app'], // SES RECEIVING EMAIL
+            ToAddresses: ['contact@trythis.life'], // SES RECEIVING EMAIL
         },
         Message: {
             Body: {
@@ -61,7 +61,7 @@ function sendEmail(formData, callback) {
             },
             Subject: {
                 Charset: 'UTF-8',
-                Data: 'newleaf - Contact form',
+                Data: 'TryThisLife - Contact form',
             },
         },
     };
